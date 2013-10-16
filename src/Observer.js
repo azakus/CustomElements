@@ -276,18 +276,20 @@ function handler(mutations) {
       forEach(mx.addedNodes, function(n) {
         //logFlags.dom && console.log(n.localName);
         if (filter(n)) {
-          return;
+          added(n)
+        } else {
+          // nodes added may need lifecycle management
+          addedNode(n);
         }
-        // nodes added may need lifecycle management
-        addedNode(n);
       });
       // removed nodes may need lifecycle management
       forEach(mx.removedNodes, function(n) {
         //logFlags.dom && console.log(n.localName);
         if (filter(n)) {
-          return;
+          removed(n);
+        } else {
+          removedNode(n);
         }
-        removedNode(n);
       });
     }
     //logFlags.dom && console.groupEnd();
